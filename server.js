@@ -6,13 +6,13 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 app.use(cors());
 app.use(express.json());
 
 app.get('/', (req, res) => {
-    res.send('Servidor online');
+    res.send('Servidor online 🚀');
 });
 
 app.post('/enviar', async (req, res) => {
@@ -50,13 +50,10 @@ ${mensagem}
             `
         });
 
-        return res.status(200).json({
-            success: true
-        });
+        return res.status(200).json({ success: true });
 
     } catch (error) {
         console.error('Erro ao enviar e-mail:', error);
-
         return res.status(500).json({
             success: false,
             error: 'Erro interno ao enviar mensagem'
@@ -65,5 +62,5 @@ ${mensagem}
 });
 
 app.listen(PORT, () => {
-    console.log(`✅ Servidor rodando em http://localhost:${PORT}`);
+    console.log(`✅ Servidor rodando na porta ${PORT}`);
 });
